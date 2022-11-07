@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   if (!username || !password) {
     throw createError({
       statusCode: 400,
-      message: 'Username and password is invalid',
+      statusMessage: 'Username and password is invalid',
     })
   }
 
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
     throw createError({
       statusCode: 500,
-      message: 'Unknown error',
+      statusMessage: 'Unknown error',
     })
   }
 })

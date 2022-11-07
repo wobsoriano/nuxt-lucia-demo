@@ -6,6 +6,9 @@ const user = useUser()
 type FetchError = Error & {
   statusCode: number
   statusMessage: string
+  data: {
+    message: string
+  }
 }
 
 const { error, data, execute } = useAsyncData(() => $fetch('/api/signup', {
@@ -28,7 +31,7 @@ async function handleSubmit() {
   catch {}
 }
 
-const errorMessage = computed(() => (error.value as FetchError)?.statusMessage ?? '')
+const errorMessage = computed(() => (error.value as FetchError)?.data?.message ?? '')
 
 definePageMeta({
   middleware: 'public',
