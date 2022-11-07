@@ -1,0 +1,29 @@
+<script setup lang="ts">
+import { signOut } from '@/lib/lucia/client'
+
+const user = useUser()
+
+async function handleSignOut() {
+  try {
+    await signOut()
+    navigateTo('/login')
+  }
+  catch (e) {
+    console.log('Error signing out', e)
+  }
+}
+
+definePageMeta({
+  middleware: 'protected',
+})
+</script>
+
+<template>
+  <div>
+    <p>This page is protected and can only be accessed by authenticated users.</p>
+    <pre class="code">{{ JSON.stringify(user, null, 2) }}</pre>
+    <button @click="handleSignOut">
+      Sign out
+    </button>
+  </div>
+</template>

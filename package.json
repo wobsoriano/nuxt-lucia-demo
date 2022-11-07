@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.29.3",
+    "eslint": "^8.27.0",
+    "nuxt": "3.0.0-rc.13",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@lucia-auth/adapter-supabase": "^0.1.2",
+    "h3": "^0.8.6",
+    "lucia-auth": "^0.1.4"
+  }
+}
