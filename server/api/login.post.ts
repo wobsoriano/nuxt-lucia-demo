@@ -5,10 +5,8 @@ export default defineEventHandler(async (event) => {
   const { username, password } = await readBody<{ username: string; password: string }>(event)
 
   if (!username || !password) {
-    throw createError({
-      statusCode: 400,
-      message: 'Username and password is required',
-    })
+    event.res.statusCode = 400
+    event.res.statusMessage = 'Username and password is invalid'
   }
 
   try {
@@ -23,10 +21,8 @@ export default defineEventHandler(async (event) => {
     const error = e as Error
 
     if (error.message === 'AUTH_INVALID_PROVIDER_ID' || error.message === 'AUTH_INVALID_PASSWORD') {
-      throw createError({
-        statusCode: 400,
-        message: 'Incorrect username or password',
-      })
+      event.res.statusCode = 400
+      event.res.statusMessage = 'Username and password is incorrect'
     }
 
     throw createError({

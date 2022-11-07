@@ -1,6 +1,6 @@
 import useUser from '@/composables/useUser'
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(() => {
   const user = useUser()
 
   if (!user.value)

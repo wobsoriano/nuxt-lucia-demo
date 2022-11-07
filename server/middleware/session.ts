@@ -1,6 +1,6 @@
-import type { Session } from 'lucia-auth'
+import type { Session, User } from 'lucia-auth'
 import { auth } from '../api/auth/[...]'
-import { getSessionUser } from '~~/lib/lucia/server'
+import { getSessionUser } from '@/lib/lucia/server'
 
 export default defineEventHandler(async (event) => {
   const { user, session } = await getSessionUser(event, auth)
@@ -10,10 +10,7 @@ export default defineEventHandler(async (event) => {
 
 declare module 'h3' {
   interface H3EventContext {
-    user: {
-      userId: string
-      username: string
-    } | null
+    user: User | null
     session: Session | null
   }
 }

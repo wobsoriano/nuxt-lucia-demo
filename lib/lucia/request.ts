@@ -6,7 +6,7 @@ export function convertH3EventRequestToStandardRequest(
   event: H3Event,
   auth: Auth,
 ): MinimalRequest {
-  const url = `${auth.configs.env === 'DEV' ? 'http' : 'https'}://localhost:3000${event.req.url}`
+  const url = `${auth.configs.env === 'DEV' ? 'http' : 'http'}://localhost:3000${event.req.url}`
 
   return {
     headers: {
