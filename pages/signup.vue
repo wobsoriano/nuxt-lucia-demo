@@ -1,23 +1,34 @@
 <script setup lang="ts">
 const username = ref('')
 const password = ref('')
+const user = useUser()
+
+type FetchError = Error & {
+  statusCode: number
+  statusMessage: string
+}
+
+const { error, data, execute } = useAsyncData(() => $fetch('/api/signup', {
+  method: 'POST',
+  body: {
+    username: username.value,
+    password: password.value,
+  },
+}), {
+  server: false,
+  immediate: false,
+})
 
 async function handleSubmit() {
   try {
-    await $fetch('/api/signup', {
-      method: 'POST',
-      body: {
-        username: username.value,
-        password: password.value,
-      },
-    })
-
-    navigateTo('/login')
+    await execute()
+    user.value = data.value!.user
+    navigateTo('/')
   }
-  catch (error) {
-    console.log(error)
-  }
+  catch {}
 }
+
+const errorMessage = computed(() => (error.value as FetchError)?.statusMessage ?? '')
 
 definePageMeta({
   middleware: 'public',
@@ -26,7 +37,7 @@ definePageMeta({
 
 <template>
   <div>
-    <h1>Create an account</h1>
+    <h2>Create an account</h2>
     <form method="post" action="/api/signup" @submit.prevent="handleSubmit">
       <label htmlFor="username">username</label>
       <br>
@@ -40,5 +51,11 @@ definePageMeta({
         Continue
       </button>
     </form>
+    <p v-if="error" class="error">
+      {{ errorMessage }}
+    </p>
+    <NuxtLink to="/login">
+      Login
+    </NuxtLink>
   </div>
 </template>

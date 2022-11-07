@@ -5,8 +5,10 @@ export default defineEventHandler(async (event) => {
   const { username, password } = await readBody<{ username: string; password: string }>(event)
 
   if (!username || !password) {
-    event.res.statusCode = 400
-    event.res.statusMessage = 'Username and password is invalid'
+    throw createError({
+      statusCode: 400,
+      message: 'Username and password is invalid',
+    })
   }
 
   try {
@@ -21,15 +23,18 @@ export default defineEventHandler(async (event) => {
 
     event.res.statusCode = 201
     return {
-      userId: session.userId,
+      user,
+      session,
     }
   }
   catch (e) {
     const error = e as Error
 
     if (error.message === 'AUTH_DUPLICATE_PROVIDER_ID') {
-      event.res.statusCode = 400
-      event.res.statusMessage = 'Username already in use'
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Username already in use',
+      })
     }
 
     throw createError({

@@ -6,6 +6,7 @@ const user = useUser()
 async function handleSignOut() {
   try {
     await signOut()
+    user.value = null
     navigateTo('/login')
   }
   catch (e) {

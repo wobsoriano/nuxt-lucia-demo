@@ -1,26 +1,34 @@
 <script setup lang="ts">
-import { getUser } from '~~/lib/lucia/client'
-
 const username = ref('')
 const password = ref('')
 const user = useUser()
 
+type FetchError = Error & {
+  statusCode: number
+  statusMessage: string
+}
+
+const { error, data, execute } = useAsyncData(() => $fetch('/api/login', {
+  method: 'POST',
+  body: {
+    username: username.value,
+    password: password.value,
+  },
+}), {
+  server: false,
+  immediate: false,
+})
+
 async function handleSubmit() {
   try {
-    const x = await $fetch('/api/login', {
-      method: 'POST',
-      body: {
-        username: username.value,
-        password: password.value,
-      },
-    })
-    user.value = x
-    navigateTo({ path: '/' })
+    await execute()
+    user.value = data.value!.user
+    navigateTo('/')
   }
-  catch (error) {
-    console.log(error)
-  }
+  catch {}
 }
+
+const errorMessage = computed(() => (error.value as FetchError)?.statusMessage ?? '')
 
 definePageMeta({
   middleware: 'public',
@@ -29,7 +37,7 @@ definePageMeta({
 
 <template>
   <div>
-    <h1>Login</h1>
+    <h2>Sign in</h2>
     <form method="post" action="/api/login" @submit.prevent="handleSubmit">
       <label htmlFor="username">username</label>
       <br>
@@ -43,5 +51,11 @@ definePageMeta({
         Continue
       </button>
     </form>
+    <p v-if="error" class="error">
+      {{ errorMessage }}
+    </p>
+    <NuxtLink to="/signup">
+      Sign up
+    </NuxtLink>
   </div>
 </template>
