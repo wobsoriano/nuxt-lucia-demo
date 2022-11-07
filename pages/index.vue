@@ -9,9 +9,7 @@ async function handleSignOut() {
     user.value = null
     navigateTo('/login')
   }
-  catch (e) {
-    console.log('Error signing out', e)
-  }
+  catch {}
 }
 
 definePageMeta({
