@@ -1,29 +1,25 @@
 import type { H3Event } from 'h3'
-import type { Auth, Session } from 'lucia-auth'
-import { appendHeader, defineEventHandler, isMethod } from 'h3'
+import { appendHeader, createError, defineEventHandler, getRouterParams, isMethod } from 'h3'
+import type { Auth, Session, User } from 'lucia-auth'
 import { convertH3EventRequestToStandardRequest } from './request'
 
 export function defineAuthHandler(auth: Auth) {
   return defineEventHandler(async (event) => {
-    const action = event.context.params._.split('/')[0] as 'user' | 'logout'
+    const params = getRouterParams(event)
+    const action = params._.split('/')[0] as 'user' | 'logout'
 
     if (action === 'user' && isMethod(event, 'GET')) {
-      try {
-        const { user } = await getSessionUser(event, auth)
-        return { user }
-      }
-      catch {
-        return { user: null }
-      }
+      const { user } = await getSessionUser(event, auth)
+      return { user }
     }
 
     if (action === 'logout' && isMethod(event, 'POST')) {
-      const sessionId = auth.parseRequest(convertH3EventRequestToStandardRequest(event, auth))
+      const sessionId = auth.validateRequestHeaders(convertH3EventRequestToStandardRequest(event, auth))
       if (!sessionId)
         return {}
       try {
         await auth.invalidateSession(sessionId)
-        await setSession(event, auth, null)
+        setSession(event, auth, null)
         return {}
       }
       catch {
@@ -34,25 +30,28 @@ export function defineAuthHandler(auth: Auth) {
       }
     }
 
-    event.res.statusCode = 404
-    return 'Not Found'
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Not Found',
+    })
   })
 }
 
-export async function setSession(event: H3Event, auth: Auth, session: Session | null) {
+export function setSession(event: H3Event, auth: Auth, session: Session | null) {
   const cookies = auth.createSessionCookies(session).map(cookie => cookie.serialize()).toString()
   for (const cookie of cookies.split(','))
     appendHeader(event, 'set-cookie', cookie)
 }
 
-export async function getSession(event: H3Event, auth: Auth) {
+export async function getSession(event: H3Event, auth: Auth): Promise<{
+  user: User
+  session: Session
+} | null> {
   try {
-    const session = await auth.validateRequest(
-      convertH3EventRequestToStandardRequest(event, auth),
-      (session: Session | null) => {
-        setSession(event, auth, session)
-      },
-    )
+    const sessionId = await auth.validateRequestHeaders(convertH3EventRequestToStandardRequest(event, auth))
+    const session = await auth.validateSessionUser(sessionId, (session: Session | null) => {
+      setSession(event, auth, session)
+    })
     return session
   }
   catch (e) {
@@ -60,16 +59,20 @@ export async function getSession(event: H3Event, auth: Auth) {
   }
 }
 
-export async function getSessionUser(event: H3Event, auth: Auth) {
+export async function getSessionUser(event: H3Event, auth: Auth): Promise<
+| { user: User; session: Session }
+| {
+  user: null
+  session: null
+}
+> {
   try {
-    const data = await auth.getSessionUserFromRequest(
-      convertH3EventRequestToStandardRequest(event, auth),
-      (session: Session | null) => {
-        setSession(event, auth, session)
-      },
-    )
+    const sessionId = await auth.validateRequestHeaders(convertH3EventRequestToStandardRequest(event, auth))
+    const session = await auth.validateSessionUser(sessionId, (session: Session | null) => {
+      setSession(event, auth, session)
+    })
 
-    return data
+    return session
   }
   catch {
     return {
