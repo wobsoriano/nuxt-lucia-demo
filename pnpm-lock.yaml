@@ -4,14 +4,14 @@ specifiers:
   '@antfu/eslint-config': ^0.29.3
   '@lucia-auth/adapter-supabase': ^0.1.2
   eslint: ^8.27.0
-  h3: ^0.8.6
+  h3: ^1.0.1
   lucia-auth: ^0.1.4
   nuxt: 3.0.0
   typescript: ^4.8.4
 
 dependencies:
   '@lucia-auth/adapter-supabase': 0.1.3_lucia-auth@0.1.4
-  h3: 0.8.6
+  h3: 1.0.1
   lucia-auth: 0.1.4
 
 devDependencies:
@@ -3247,15 +3247,6 @@ packages:
       duplexer: 0.1.2
     dev: true
 
-  /h3/0.8.6:
-    resolution: {integrity: sha512-CSWNOKa3QGo67rFU2PhbFTp0uPJtilNji2Z0pMiSRQt3+OkIW0u3E1WMJqIycLqaTgb9JyFqH/S4mcTyyGtvyQ==}
-    dependencies:
-      cookie-es: 0.5.0
-      destr: 1.2.1
-      radix3: 0.2.1
-      ufo: 0.8.6
-    dev: false
-
   /h3/1.0.1:
     resolution: {integrity: sha512-gDCGpRvjchZW2JBlTqbJ9IOs+mdkXXuwSQkSye+jubHAv/UhdamKqoQvd4RFgyBNjHSId8Y+b10UdTcPlP/V+w==}
     dependencies:
@@ -3263,7 +3254,6 @@ packages:
       destr: 1.2.1
       radix3: 1.0.0
       ufo: 1.0.0
-    dev: true
 
   /has-bigints/1.0.2:
     resolution: {integrity: sha512-tSvCKtBr9lkF0Ex0aQiP9N+OpV4zi2r/Nee5VkRDbaqv35RLYMzbwQfFSZZH0kR+Rd6302UJZ2p/bJCEoR3VoQ==}
@@ -5025,13 +5015,8 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /radix3/0.2.1:
-    resolution: {integrity: sha512-FnhArTl5Tq7dodiLeSPKrDUyCQuJqEncP8cKdyy399g8F/cz7GH6FmzA3Rkosu2IZMkpswFFwXfb2ERSiL06pg==}
-    dev: false
-
   /radix3/1.0.0:
     resolution: {integrity: sha512-6n3AEXth91ASapMVKiEh2wrbFJmI+NBilrWE0AbiGgfm0xet0QXC8+a3K19r1UVYjUjctUgB053c3V/J6V0kCQ==}
-    dev: true
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -5759,10 +5744,10 @@ packages:
 
   /ufo/0.8.6:
     resolution: {integrity: sha512-fk6CmUgwKCfX79EzcDQQpSCMxrHstvbLswFChHS0Vump+kFkw7nJBfTZoC1j0bOGoY9I7R3n2DGek5ajbcYnOw==}
+    dev: true
 
   /ufo/1.0.0:
     resolution: {integrity: sha512-DRty0ZBNlJ2R59y4mEupJRKLbkLQsc4qtxjpQv78AwEDuBkaUogMc2LkeqW3HddFlw6NwnXYfdThEZOiNgkmmQ==}
-    dev: true
 
   /ultrahtml/1.0.0:
     resolution: {integrity: sha512-BOtReLegZ/OlSTVOSt4aH+wrUPwxoXvapUHXjwhDE4k4kMISWdfUR4PH5wvt/vgKjFcAcEUPFEZQiPiB87XO3Q==}
