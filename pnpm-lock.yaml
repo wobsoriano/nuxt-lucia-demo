@@ -5,14 +5,14 @@ specifiers:
   '@lucia-auth/adapter-supabase': ^0.1.2
   eslint: ^8.27.0
   h3: ^1.0.1
-  lucia-auth: ^0.1.4
+  lucia-auth: ^0.2.0
   nuxt: 3.0.0
   typescript: ^4.8.4
 
 dependencies:
-  '@lucia-auth/adapter-supabase': 0.1.3_lucia-auth@0.1.4
+  '@lucia-auth/adapter-supabase': 0.1.3_lucia-auth@0.2.0
   h3: 1.0.1
-  lucia-auth: 0.1.4
+  lucia-auth: 0.2.0
 
 devDependencies:
   '@antfu/eslint-config': 0.29.4_e3uo4sehh4zr4i6m57mkkxxv7y
@@ -515,13 +515,13 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@lucia-auth/adapter-supabase/0.1.3_lucia-auth@0.1.4:
+  /@lucia-auth/adapter-supabase/0.1.3_lucia-auth@0.2.0:
     resolution: {integrity: sha512-9EjCV97hSSNw98CBiVNuyKf+xfXj9dHLATeyTO7gBiDqYr0wWlEh9HO1Rjk/qwPK4m82dXV1jOR5iVTS/5bDQg==}
     peerDependencies:
       lucia-auth: 0.1.x || 0.2.x
     dependencies:
       '@supabase/postgrest-js': 0.37.4
-      lucia-auth: 0.1.4
+      lucia-auth: 0.2.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -3903,8 +3903,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucia-auth/0.1.4:
-    resolution: {integrity: sha512-3qIlQMp/L0FN+5Zd91UMXiQLoJ8W90I659X07TuNwl5aioXnuYsRvmKJWMz8iLn/ToJJxjRlDF66KFdTr/YyyQ==}
+  /lucia-auth/0.2.0:
+    resolution: {integrity: sha512-+vq87UUsCqsWVpyqUl3f+ZH3/RGKOU18We+vsUHQV1CZtZS5EScNJIpEqyUG/piswbDxe9VYS8pTpJsIzevcvA==}
     dependencies:
       nanoid: 4.0.0
     dev: false
