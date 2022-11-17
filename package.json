@@ -19,6 +19,7 @@
   "dependencies": {
     "@lucia-auth/adapter-supabase": "^0.1.3",
     "h3": "^1.0.1",
-    "lucia-auth": "^0.2.0"
+    "lucia-auth": "^0.2.0",
+    "requrl": "^3.0.2"
   }
 }

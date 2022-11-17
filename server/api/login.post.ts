@@ -16,7 +16,6 @@ export default defineEventHandler(async (event) => {
     const session = await auth.createSession(user.userId)
     await setSession(event, auth, session)
 
-    event.res.statusCode = 201
     return {
       session,
       user,

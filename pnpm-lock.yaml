@@ -7,12 +7,14 @@ specifiers:
   h3: ^1.0.1
   lucia-auth: ^0.2.0
   nuxt: 3.0.0
+  requrl: ^3.0.2
   typescript: ^4.8.4
 
 dependencies:
   '@lucia-auth/adapter-supabase': 0.1.3_lucia-auth@0.2.0
   h3: 1.0.1
   lucia-auth: 0.2.0
+  requrl: 3.0.2
 
 devDependencies:
   '@antfu/eslint-config': 0.29.4_e3uo4sehh4zr4i6m57mkkxxv7y
@@ -5135,6 +5137,10 @@ packages:
   /requires-port/1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: true
+
+  /requrl/3.0.2:
+    resolution: {integrity: sha512-f3gjR6d8MhOpn46PP+DSJywbmxi95fxQm3coXBFwognjFLla9X6tr8BdNyaIKNOEkaRbRcm0/zYAqN19N1oyhg==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
